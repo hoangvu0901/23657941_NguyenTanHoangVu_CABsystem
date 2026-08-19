@@ -554,3 +554,1047 @@ Các Business Requirement được xây dựng để bao phủ các Business Goa
 | **BG_09 – Bảo mật** | BR_01, BR_17, BR_27, BR_28, BR_35 |
 | **BG_10 – Mở rộng chức năng** | BR_32, BR_34 |
 
+# Bước 6: Kết hợp các nghiệp vụ thành Business Process
+
+Dựa trên các Business Requirement đã xác định ở Bước 5, các nghiệp vụ của CAB System được kết hợp thành các Business Process chính. Mỗi Business Process mô tả một luồng nghiệp vụ hoàn chỉnh và được biểu diễn bằng sơ đồ Mermaid.
+
+## 6.1. Tổng quan các Business Process
+
+| Mã | Business Process | Mô tả |
+|---|---|---|
+| BP01 | Quản lý tài khoản | Đăng ký, đăng nhập và quản lý thông tin khách hàng/tài xế |
+| BP02 | Đặt xe và phân công tài xế | Tiếp nhận yêu cầu, tìm kiếm và phân công tài xế |
+| BP03 | Thực hiện chuyến đi | Quản lý toàn bộ trạng thái của chuyến từ khi tài xế nhận đến khi hoàn thành |
+| BP04 | Thanh toán | Tính cước, lựa chọn phương thức và xử lý giao dịch |
+| BP05 | Thông báo | Gửi thông báo cho khách hàng và tài xế theo từng sự kiện |
+| BP06 | Quản trị vận hành | Quản lý người dùng, tài xế, phương tiện, chuyến đi và xử lý sự cố |
+| BP07 | Báo cáo | Tổng hợp dữ liệu chuyến đi, doanh thu và hiệu quả tài xế |
+# Bước 7: Phân rã các yêu cầu về chức năng
+
+Dựa trên các Business Requirement (BR) đã xác định ở Bước 5 và các Business Process (BP) ở Bước 6, các yêu cầu nghiệp vụ được tiếp tục phân rã thành các **Functional Requirement (FR)**.
+
+Functional Requirement mô tả hệ thống **phải thực hiện chức năng gì** để đáp ứng yêu cầu nghiệp vụ.
+
+Mỗi Functional Requirement được đánh mã từ **FR_01** trở đi và được liên kết với Business Requirement tương ứng nhằm đảm bảo khả năng truy vết từ:
+
+**Business Goal → Business Requirement → Functional Requirement → Business Process → Use Case**
+
+---
+
+# 7.1. Nguyên tắc phân rã
+
+Việc phân rã yêu cầu được thực hiện theo các nguyên tắc:
+
+* Mỗi BR có thể được phân rã thành một hoặc nhiều FR.
+* Một FR phải mô tả một hành vi/chức năng cụ thể của hệ thống.
+* FR phải có thể kiểm thử được.
+* FR phải xác định được Actor sử dụng hoặc kích hoạt.
+* FR phải có khả năng liên kết với một Business Process.
+* Không đưa các yêu cầu chưa được xác nhận vào Functional Requirement chính thức.
+* Các yêu cầu về hiệu năng, bảo mật, khả năng mở rộng và chịu lỗi sẽ được quản lý bổ sung dưới nhóm Non-Functional Requirement.
+
+---
+
+# 7.2. Phân rã chức năng tổng thể
+
+CAB System được phân rã thành các nhóm chức năng chính:
+
+```text
+CAB SYSTEM
+│
+├── 1. Quản lý tài khoản
+│   ├── Đăng ký tài khoản
+│   ├── Đăng nhập
+│   ├── Đăng xuất
+│   ├── Xem thông tin cá nhân
+│   └── Cập nhật thông tin cá nhân
+│
+├── 2. Quản lý tài xế
+│   ├── Quản lý hồ sơ tài xế
+│   ├── Quản lý phương tiện
+│   ├── Cập nhật trạng thái sẵn sàng
+│   ├── Nhận yêu cầu chuyến
+│   ├── Chấp nhận chuyến
+│   └── Từ chối chuyến
+│
+├── 3. Đặt xe và phân công tài xế
+│   ├── Nhập thông tin chuyến
+│   ├── Chọn loại xe
+│   ├── Tạo yêu cầu đặt xe
+│   ├── Tìm tài xế phù hợp
+│   ├── Gửi yêu cầu đến tài xế
+│   ├── Xử lý tài xế từ chối
+│   ├── Xử lý tài xế không phản hồi
+│   └── Thông báo không tìm được tài xế
+│
+├── 4. Quản lý chuyến đi
+│   ├── Tạo chuyến
+│   ├── Cập nhật trạng thái chuyến
+│   ├── Cập nhật vị trí tài xế
+│   ├── Theo dõi chuyến
+│   ├── Xem thông tin tài xế
+│   ├── Xem thông tin phương tiện
+│   ├── Hoàn thành chuyến
+│   └── Xem lịch sử chuyến
+│
+├── 5. Thanh toán
+│   ├── Tính cước
+│   ├── Chọn phương thức thanh toán
+│   ├── Thanh toán tiền mặt
+│   ├── Thanh toán điện tử
+│   ├── Ghi nhận giao dịch
+│   ├── Xử lý thanh toán thất bại
+│   └── Thông báo kết quả thanh toán
+│
+├── 6. Thông báo
+│   ├── Thông báo đặt xe
+│   ├── Thông báo tài xế nhận chuyến
+│   ├── Thông báo tài xế đến điểm đón
+│   ├── Thông báo hoàn thành chuyến
+│   ├── Thông báo thanh toán
+│   └── Thông báo chuyến mới cho tài xế
+│
+├── 7. Đánh giá
+│   ├── Đánh giá tài xế
+│   ├── Ghi nhận đánh giá
+│   └── Xem đánh giá
+│
+├── 8. Quản trị vận hành
+│   ├── Quản lý khách hàng
+│   ├── Quản lý tài xế
+│   ├── Quản lý phương tiện
+│   ├── Giám sát chuyến
+│   ├── Xử lý sự cố
+│   ├── Tra cứu lịch sử
+│   └── Phân quyền
+│
+├── 9. Báo cáo
+│   ├── Báo cáo chuyến đi
+│   ├── Báo cáo doanh thu
+│   ├── Báo cáo hoàn thành/hủy
+│   └── Báo cáo hiệu quả tài xế
+│
+└── 10. Bảo mật và Audit
+    ├── Xác thực
+    ├── Phân quyền
+    ├── Ghi nhận Audit Log
+    └── Bảo vệ dữ liệu
+```
+
+---
+
+# 7.3. FR – Nhóm 1: Quản lý tài khoản
+
+## FR_01 – Đăng ký tài khoản
+
+**BR liên quan:** BR_01
+
+Hệ thống phải cho phép khách hàng và tài xế tạo tài khoản bằng các thông tin được yêu cầu.
+
+### Chức năng con
+
+* FR_01.1 – Nhập thông tin đăng ký.
+* FR_01.2 – Kiểm tra dữ liệu bắt buộc.
+* FR_01.3 – Kiểm tra thông tin tài khoản đã tồn tại.
+* FR_01.4 – Tạo tài khoản mới.
+* FR_01.5 – Thông báo kết quả đăng ký.
+
+---
+
+## FR_02 – Đăng nhập
+
+**BR liên quan:** BR_01
+
+Hệ thống phải cho phép người dùng đăng nhập vào hệ thống.
+
+### Chức năng con
+
+* FR_02.1 – Nhập thông tin đăng nhập.
+* FR_02.2 – Kiểm tra thông tin xác thực.
+* FR_02.3 – Xác định loại tài khoản.
+* FR_02.4 – Tạo phiên đăng nhập.
+* FR_02.5 – Thông báo lỗi khi đăng nhập không thành công.
+
+---
+
+## FR_03 – Quản lý thông tin cá nhân
+
+**BR liên quan:** BR_01
+
+Hệ thống phải cho phép người dùng xem và cập nhật thông tin cá nhân.
+
+### Chức năng con
+
+* FR_03.1 – Xem thông tin cá nhân.
+* FR_03.2 – Cập nhật thông tin cá nhân.
+* FR_03.3 – Kiểm tra dữ liệu cập nhật.
+* FR_03.4 – Lưu thông tin thay đổi.
+
+---
+
+## FR_04 – Đăng xuất
+
+**BR liên quan:** BR_01
+
+Hệ thống phải cho phép người dùng kết thúc phiên đăng nhập.
+
+---
+
+# 7.4. FR – Nhóm 2: Quản lý tài xế
+
+## FR_05 – Quản lý hồ sơ tài xế
+
+**BR liên quan:** BR_07, BR_23
+
+Hệ thống phải cho phép quản lý thông tin tài xế.
+
+### Chức năng con
+
+* FR_05.1 – Tạo hồ sơ tài xế.
+* FR_05.2 – Xem hồ sơ tài xế.
+* FR_05.3 – Cập nhật hồ sơ tài xế.
+* FR_05.4 – Quản lý trạng thái tài xế.
+
+---
+
+## FR_06 – Quản lý phương tiện
+
+**BR liên quan:** BR_23
+
+Hệ thống phải cho phép tài xế và nhân viên vận hành quản lý thông tin phương tiện.
+
+### Chức năng con
+
+* FR_06.1 – Thêm phương tiện.
+* FR_06.2 – Cập nhật thông tin phương tiện.
+* FR_06.3 – Xem thông tin phương tiện.
+* FR_06.4 – Quản lý trạng thái phương tiện.
+
+---
+
+## FR_07 – Cập nhật trạng thái sẵn sàng
+
+**BR liên quan:** BR_07
+
+Tài xế phải có khả năng chuyển đổi trạng thái:
+
+```text
+OFFLINE
+   ↓
+AVAILABLE
+   ↓
+BUSY
+   ↓
+AVAILABLE
+```
+
+Các trạng thái chính:
+
+* Không sẵn sàng.
+* Sẵn sàng nhận chuyến.
+* Đang thực hiện chuyến.
+
+---
+
+## FR_08 – Nhận yêu cầu chuyến
+
+**BR liên quan:** BR_08
+
+Hệ thống phải gửi yêu cầu chuyến đến tài xế phù hợp.
+
+Thông tin yêu cầu tối thiểu gồm:
+
+* Điểm đón.
+* Điểm đến.
+* Loại xe.
+* Thông tin chuyến.
+* Thời gian yêu cầu.
+
+---
+
+## FR_09 – Chấp nhận hoặc từ chối chuyến
+
+**BR liên quan:** BR_08
+
+Tài xế phải có khả năng:
+
+* Chấp nhận chuyến.
+* Từ chối chuyến.
+
+Kết quả thao tác phải được hệ thống ghi nhận để tiếp tục quá trình phân công.
+
+---
+
+# 7.5. FR – Nhóm 3: Đặt xe và phân công tài xế
+
+## FR_10 – Nhập thông tin đặt xe
+
+**BR liên quan:** BR_02
+
+Khách hàng phải có khả năng nhập:
+
+* Điểm đón.
+* Điểm đến.
+* Thông tin liên quan đến chuyến.
+
+---
+
+## FR_11 – Lựa chọn loại xe
+
+**BR liên quan:** BR_03
+
+Hệ thống phải hiển thị các loại xe được hỗ trợ và cho phép khách hàng lựa chọn loại xe phù hợp.
+
+---
+
+## FR_12 – Tạo yêu cầu đặt xe
+
+**BR liên quan:** BR_02
+
+Sau khi khách hàng xác nhận đặt xe, hệ thống phải:
+
+1. Kiểm tra thông tin đặt xe.
+2. Tạo yêu cầu chuyến.
+3. Gán trạng thái yêu cầu.
+4. Bắt đầu quá trình tìm tài xế.
+
+---
+
+## FR_13 – Tìm kiếm tài xế phù hợp
+
+**BR liên quan:** BR_04
+
+Hệ thống phải tìm tài xế dựa trên các tiêu chí đã được xác định.
+
+Trong phạm vi MVP, tiêu chí chính gồm:
+
+* Tài xế đang sẵn sàng.
+* Tài xế phù hợp với loại xe.
+* Vị trí tài xế phù hợp với điểm đón.
+
+---
+
+## FR_14 – Gửi yêu cầu đến tài xế
+
+**BR liên quan:** BR_04, BR_08
+
+Hệ thống phải gửi yêu cầu chuyến đến tài xế được lựa chọn.
+
+Nếu tài xế chấp nhận:
+
+```text
+Yêu cầu đặt xe
+      ↓
+Tài xế chấp nhận
+      ↓
+Phân công thành công
+      ↓
+Tạo chuyến
+```
+
+---
+
+## FR_15 – Xử lý tài xế từ chối
+
+**BR liên quan:** BR_05
+
+Nếu tài xế từ chối chuyến:
+
+```text
+Tài xế từ chối
+      ↓
+Đánh dấu tài xế không phù hợp
+      ↓
+Tìm tài xế tiếp theo
+      ↓
+Gửi yêu cầu mới
+```
+
+---
+
+## FR_16 – Xử lý tài xế không phản hồi
+
+**BR liên quan:** BR_05
+
+Nếu tài xế không phản hồi trong khoảng thời gian được hệ thống xác định, hệ thống phải có khả năng chuyển yêu cầu sang tài xế khác.
+
+> Thời gian phản hồi cụ thể cần được xác nhận với khách hàng trước khi triển khai chính thức.
+
+---
+
+## FR_17 – Xử lý không tìm được tài xế
+
+**BR liên quan:** BR_06
+
+Nếu hệ thống không tìm được tài xế phù hợp, hệ thống phải:
+
+* Cập nhật trạng thái yêu cầu.
+* Thông báo cho khách hàng.
+* Ghi nhận sự kiện vào lịch sử hệ thống.
+
+---
+
+# 7.6. FR – Nhóm 4: Quản lý chuyến đi
+
+## FR_18 – Tạo chuyến đi
+
+**BR liên quan:** BR_09
+
+Sau khi tài xế chấp nhận yêu cầu, hệ thống phải tạo chuyến đi chính thức.
+
+Thông tin chuyến bao gồm:
+
+* Mã chuyến.
+* Khách hàng.
+* Tài xế.
+* Phương tiện.
+* Điểm đón.
+* Điểm đến.
+* Loại xe.
+* Trạng thái chuyến.
+* Thời gian tạo.
+
+---
+
+## FR_19 – Quản lý trạng thái chuyến
+
+**BR liên quan:** BR_09
+
+Hệ thống phải quản lý vòng đời chuyến.
+
+Luồng trạng thái đề xuất:
+
+```text
+REQUESTED
+    ↓
+SEARCHING_DRIVER
+    ↓
+DRIVER_ASSIGNED
+    ↓
+DRIVER_ARRIVING
+    ↓
+DRIVER_ARRIVED
+    ↓
+IN_PROGRESS
+    ↓
+COMPLETED
+```
+
+Các trạng thái kết thúc khác:
+
+```text
+CANCELLED
+FAILED
+```
+
+---
+
+## FR_20 – Cập nhật trạng thái chuyến
+
+**BR liên quan:** BR_09
+
+Tài xế phải có khả năng cập nhật trạng thái chuyến theo từng giai đoạn.
+
+Ví dụ:
+
+* Đang di chuyển đến điểm đón.
+* Đã đến điểm đón.
+* Đang thực hiện chuyến.
+* Đã hoàn thành chuyến.
+
+---
+
+## FR_21 – Cập nhật vị trí tài xế
+
+**BR liên quan:** BR_10
+
+Hệ thống phải tiếp nhận và cập nhật vị trí hiện tại của tài xế để phục vụ:
+
+* Phân công.
+* Theo dõi chuyến.
+* Hiển thị vị trí cho khách hàng.
+
+---
+
+## FR_22 – Theo dõi chuyến theo thời gian thực
+
+**BR liên quan:** BR_11
+
+Khách hàng phải có khả năng xem:
+
+* Trạng thái chuyến.
+* Vị trí tài xế.
+* Thông tin tài xế.
+* Thông tin phương tiện.
+
+---
+
+## FR_23 – Xem thông tin tài xế và phương tiện
+
+**BR liên quan:** BR_12
+
+Sau khi chuyến được phân công, hệ thống phải cung cấp thông tin cần thiết cho khách hàng.
+
+Ví dụ:
+
+* Tên tài xế.
+* Thông tin phương tiện.
+* Biển số xe.
+* Thông tin liên quan đến chuyến.
+
+---
+
+## FR_24 – Hoàn thành chuyến
+
+**BR liên quan:** BR_09
+
+Khi chuyến kết thúc, hệ thống phải:
+
+1. Cập nhật trạng thái thành `COMPLETED`.
+2. Ghi nhận thời gian hoàn thành.
+3. Xác định số tiền cần thanh toán.
+4. Chuyển sang quy trình thanh toán.
+5. Cho phép khách hàng đánh giá tài xế.
+
+---
+
+## FR_25 – Xem lịch sử chuyến
+
+**BR liên quan:** BR_13
+
+Khách hàng phải có khả năng xem danh sách các chuyến đã thực hiện.
+
+Thông tin có thể bao gồm:
+
+* Mã chuyến.
+* Thời gian.
+* Điểm đón.
+* Điểm đến.
+* Tài xế.
+* Loại xe.
+* Giá trị chuyến.
+* Trạng thái chuyến.
+
+---
+
+# 7.7. FR – Nhóm 5: Thanh toán
+
+## FR_26 – Tính cước chuyến đi
+
+**BR liên quan:** BR_14
+
+Sau khi chuyến hoàn thành, hệ thống phải xác định số tiền khách hàng cần thanh toán.
+
+> Công thức tính cước chi tiết chưa được xác nhận và cần được bổ sung sau khi có quy định nghiệp vụ chính thức.
+
+---
+
+## FR_27 – Lựa chọn phương thức thanh toán
+
+**BR liên quan:** BR_15, BR_16
+
+Khách hàng phải có khả năng lựa chọn:
+
+* Tiền mặt.
+* Thanh toán điện tử.
+
+---
+
+## FR_28 – Thanh toán tiền mặt
+
+**BR liên quan:** BR_15
+
+Hệ thống phải ghi nhận việc thanh toán bằng tiền mặt sau khi chuyến hoàn thành.
+
+---
+
+## FR_29 – Thanh toán điện tử
+
+**BR liên quan:** BR_16
+
+Hệ thống phải tích hợp với nhà cung cấp thanh toán bên ngoài.
+
+Luồng:
+
+```text
+CAB System
+    ↓
+Payment Gateway
+    ↓
+Xử lý giao dịch
+    ↓
+Kết quả giao dịch
+    ↓
+CAB System
+```
+
+---
+
+## FR_30 – Ghi nhận giao dịch
+
+**BR liên quan:** BR_18
+
+Hệ thống phải lưu thông tin cần thiết để quản lý giao dịch, chẳng hạn:
+
+* Mã giao dịch.
+* Mã chuyến.
+* Số tiền.
+* Phương thức thanh toán.
+* Trạng thái giao dịch.
+* Thời gian giao dịch.
+
+Hệ thống không lưu thông tin thanh toán nhạy cảm.
+
+---
+
+## FR_31 – Xử lý thanh toán thất bại
+
+**BR liên quan:** BR_19
+
+Nếu thanh toán điện tử thất bại, hệ thống phải:
+
+* Ghi nhận trạng thái thất bại.
+* Thông báo cho khách hàng.
+* Cho phép thực hiện lại giao dịch theo chính sách được xác định.
+
+---
+
+## FR_32 – Thông báo kết quả thanh toán
+
+**BR liên quan:** BR_18
+
+Hệ thống phải thông báo cho khách hàng:
+
+* Thanh toán thành công.
+* Thanh toán thất bại.
+* Giao dịch đang xử lý nếu có.
+
+---
+
+# 7.8. FR – Nhóm 6: Thông báo
+
+## FR_33 – Thông báo cho khách hàng
+
+**BR liên quan:** BR_20
+
+Hệ thống phải gửi thông báo tại các sự kiện:
+
+* Đặt xe thành công.
+* Tài xế nhận chuyến.
+* Tài xế đang đến.
+* Tài xế đã đến.
+* Chuyến hoàn thành.
+* Thanh toán thành công/thất bại.
+* Không tìm được tài xế.
+
+---
+
+## FR_34 – Thông báo cho tài xế
+
+**BR liên quan:** BR_21
+
+Hệ thống phải gửi thông báo khi:
+
+* Có chuyến mới.
+* Chuyến bị thay đổi.
+* Có sự kiện quan trọng liên quan đến chuyến.
+
+---
+
+# 7.9. FR – Nhóm 7: Đánh giá
+
+## FR_35 – Đánh giá tài xế
+
+**BR liên quan:** BR_22
+
+Sau khi chuyến hoàn thành, khách hàng phải có khả năng đánh giá tài xế.
+
+Chức năng bao gồm:
+
+* Chọn mức đánh giá.
+* Nhập nhận xét nếu có.
+* Gửi đánh giá.
+* Lưu đánh giá.
+
+---
+
+## FR_36 – Quản lý đánh giá
+
+**BR liên quan:** BR_22, BR_30
+
+Hệ thống phải lưu trữ đánh giá để phục vụ:
+
+* Tra cứu.
+* Thống kê.
+* Đánh giá hiệu quả tài xế.
+
+---
+
+# 7.10. FR – Nhóm 8: Quản trị vận hành
+
+## FR_37 – Quản lý khách hàng
+
+**BR liên quan:** BR_23
+
+Nhân viên vận hành phải có khả năng:
+
+* Xem danh sách khách hàng.
+* Tìm kiếm khách hàng.
+* Xem thông tin khách hàng.
+* Cập nhật thông tin theo quyền được cấp.
+* Theo dõi lịch sử hoạt động cần thiết.
+
+---
+
+## FR_38 – Quản lý tài xế
+
+**BR liên quan:** BR_23
+
+Nhân viên vận hành phải có khả năng:
+
+* Xem danh sách tài xế.
+* Tìm kiếm tài xế.
+* Xem hồ sơ tài xế.
+* Quản lý trạng thái tài xế.
+* Xem thông tin phương tiện.
+
+---
+
+## FR_39 – Quản lý phương tiện
+
+**BR liên quan:** BR_23
+
+Nhân viên vận hành phải có khả năng:
+
+* Thêm phương tiện.
+* Cập nhật phương tiện.
+* Xem thông tin phương tiện.
+* Quản lý trạng thái phương tiện.
+
+---
+
+## FR_40 – Giám sát chuyến đang diễn ra
+
+**BR liên quan:** BR_24
+
+Nhân viên vận hành phải có khả năng theo dõi:
+
+* Các chuyến đang hoạt động.
+* Trạng thái từng chuyến.
+* Tài xế đang thực hiện chuyến.
+* Vị trí tài xế nếu có dữ liệu.
+* Các chuyến gặp vấn đề.
+
+---
+
+## FR_41 – Xử lý sự cố chuyến đi
+
+**BR liên quan:** BR_25
+
+Nhân viên vận hành phải có khả năng tiếp nhận và xử lý các chuyến gặp sự cố.
+
+Ví dụ:
+
+* Không tìm được tài xế.
+* Tài xế không phản hồi.
+* Thanh toán lỗi.
+* Chuyến bị lỗi trạng thái.
+* Vấn đề phát sinh trong quá trình thực hiện chuyến.
+
+---
+
+## FR_42 – Tra cứu lịch sử
+
+**BR liên quan:** BR_26
+
+Nhân viên vận hành phải có khả năng tra cứu:
+
+* Lịch sử chuyến.
+* Lịch sử giao dịch.
+* Lịch sử trạng thái.
+* Thông tin liên quan đến sự cố.
+
+---
+
+## FR_43 – Quản lý quyền truy cập
+
+**BR liên quan:** BR_27
+
+Hệ thống phải hỗ trợ phân quyền theo vai trò.
+
+Các vai trò chính:
+
+```text
+Customer
+Driver
+Operations Staff
+Administrator
+```
+
+Mỗi vai trò chỉ được phép truy cập các chức năng tương ứng.
+
+---
+
+# 7.11. FR – Nhóm 9: Báo cáo
+
+## FR_44 – Báo cáo số lượng chuyến
+
+**BR liên quan:** BR_29
+
+Hệ thống phải cung cấp thống kê:
+
+* Tổng số chuyến.
+* Số chuyến hoàn thành.
+* Số chuyến hủy.
+* Số chuyến thất bại.
+
+---
+
+## FR_45 – Báo cáo doanh thu
+
+**BR liên quan:** BR_29
+
+Hệ thống phải cung cấp báo cáo doanh thu theo khoảng thời gian.
+
+Có thể hỗ trợ:
+
+* Theo ngày.
+* Theo tuần.
+* Theo tháng.
+* Theo khoảng thời gian tùy chọn.
+
+---
+
+## FR_46 – Báo cáo tỷ lệ hoàn thành và hủy
+
+**BR liên quan:** BR_29
+
+Hệ thống phải tính toán và hiển thị:
+
+* Tỷ lệ hoàn thành.
+* Tỷ lệ hủy.
+* Tỷ lệ thất bại.
+
+---
+
+## FR_47 – Báo cáo hiệu quả tài xế
+
+**BR liên quan:** BR_30
+
+Hệ thống phải hỗ trợ thống kê hiệu quả tài xế dựa trên dữ liệu nghiệp vụ.
+
+Có thể bao gồm:
+
+* Số chuyến nhận.
+* Số chuyến hoàn thành.
+* Số chuyến bị từ chối.
+* Tỷ lệ hoàn thành.
+* Điểm đánh giá trung bình.
+
+---
+
+# 7.12. FR – Nhóm 10: Audit và bảo mật chức năng
+
+## FR_48 – Xác thực người dùng
+
+**BR liên quan:** BR_01, BR_27, BR_35
+
+Hệ thống phải xác thực người dùng trước khi cho phép truy cập các chức năng yêu cầu đăng nhập.
+
+---
+
+## FR_49 – Kiểm soát quyền truy cập
+
+**BR liên quan:** BR_27
+
+Hệ thống phải kiểm tra quyền của người dùng trước khi thực hiện các thao tác quản trị hoặc thao tác nhạy cảm.
+
+---
+
+## FR_50 – Ghi nhận Audit Log
+
+**BR liên quan:** BR_28
+
+Hệ thống phải ghi nhận các thao tác quan trọng.
+
+Thông tin Audit Log có thể gồm:
+
+* Người thực hiện.
+* Thời gian.
+* Chức năng.
+* Hành động.
+* Đối tượng bị tác động.
+* Kết quả thao tác.
+
+---
+
+## FR_51 – Bảo vệ dữ liệu
+
+**BR liên quan:** BR_35
+
+Hệ thống phải áp dụng các cơ chế bảo vệ đối với:
+
+* Thông tin cá nhân.
+* Thông tin tài khoản.
+* Dữ liệu vị trí.
+* Dữ liệu giao dịch.
+* Dữ liệu vận hành.
+
+---
+
+# 7.13. Tổng hợp Functional Requirement
+
+| Nhóm               | Mã FR         | Chức năng                                                     |
+| ------------------ | ------------- | ------------------------------------------------------------- |
+| Quản lý tài khoản  | FR_01 – FR_04 | Đăng ký, đăng nhập, quản lý thông tin, đăng xuất              |
+| Quản lý tài xế     | FR_05 – FR_09 | Hồ sơ, phương tiện, trạng thái, nhận/chấp nhận/từ chối chuyến |
+| Đặt xe & phân công | FR_10 – FR_17 | Đặt xe, tìm tài xế, phân công và xử lý từ chối/không phản hồi |
+| Quản lý chuyến     | FR_18 – FR_25 | Tạo, cập nhật, theo dõi và lưu lịch sử chuyến                 |
+| Thanh toán         | FR_26 – FR_32 | Tính cước, thanh toán, giao dịch và xử lý lỗi                 |
+| Thông báo          | FR_33 – FR_34 | Thông báo cho khách hàng và tài xế                            |
+| Đánh giá           | FR_35 – FR_36 | Đánh giá và quản lý đánh giá                                  |
+| Quản trị           | FR_37 – FR_43 | Quản lý dữ liệu, giám sát, xử lý sự cố, phân quyền            |
+| Báo cáo            | FR_44 – FR_47 | Báo cáo chuyến, doanh thu và hiệu quả tài xế                  |
+| Bảo mật & Audit    | FR_48 – FR_51 | Xác thực, phân quyền, audit log và bảo vệ dữ liệu             |
+
+Tổng cộng:
+
+**51 Functional Requirement (FR)**
+
+---
+
+# 7.14. Ma trận truy vết BR → FR
+
+| Business Requirement | Functional Requirement                              |
+| -------------------- | --------------------------------------------------- |
+| BR_01                | FR_01, FR_02, FR_03, FR_04, FR_48                   |
+| BR_02                | FR_10, FR_12                                        |
+| BR_03                | FR_11                                               |
+| BR_04                | FR_13, FR_14                                        |
+| BR_05                | FR_15, FR_16                                        |
+| BR_06                | FR_17, FR_33                                        |
+| BR_07                | FR_05, FR_07                                        |
+| BR_08                | FR_08, FR_09                                        |
+| BR_09                | FR_18, FR_19, FR_20, FR_24                          |
+| BR_10                | FR_21                                               |
+| BR_11                | FR_22                                               |
+| BR_12                | FR_23                                               |
+| BR_13                | FR_25                                               |
+| BR_14                | FR_26                                               |
+| BR_15                | FR_27, FR_28                                        |
+| BR_16                | FR_27, FR_29                                        |
+| BR_17                | FR_30, FR_51                                        |
+| BR_18                | FR_30, FR_32                                        |
+| BR_19                | FR_31                                               |
+| BR_20                | FR_33                                               |
+| BR_21                | FR_34                                               |
+| BR_22                | FR_35, FR_36                                        |
+| BR_23                | FR_37, FR_38, FR_39                                 |
+| BR_24                | FR_40                                               |
+| BR_25                | FR_41                                               |
+| BR_26                | FR_42                                               |
+| BR_27                | FR_43, FR_49                                        |
+| BR_28                | FR_50                                               |
+| BR_29                | FR_44, FR_45, FR_46                                 |
+| BR_30                | FR_47                                               |
+| BR_31                | Yêu cầu phi chức năng – Performance/Scalability     |
+| BR_32                | Yêu cầu kiến trúc – Modularity/Scalability          |
+| BR_33                | Yêu cầu phi chức năng – Reliability/Fault Isolation |
+| BR_34                | Yêu cầu kiến trúc – Extensibility                   |
+| BR_35                | FR_48, FR_49, FR_51                                 |
+
+---
+
+# 7.15. Phân biệt Functional Requirement và Non-Functional Requirement
+
+Sau khi phân rã, cần lưu ý rằng không phải tất cả BR đều chuyển trực tiếp thành FR.
+
+### Functional Requirement
+
+Mô tả:
+
+> **Hệ thống phải làm gì?**
+
+Ví dụ:
+
+* Đăng nhập.
+* Đặt xe.
+* Tìm tài xế.
+* Thanh toán.
+* Gửi thông báo.
+* Tạo báo cáo.
+* Quản lý người dùng.
+
+### Non-Functional Requirement
+
+Mô tả:
+
+> **Hệ thống phải hoạt động như thế nào?**
+
+Ví dụ:
+
+* Thời gian phản hồi.
+* Khả năng chịu tải.
+* Khả năng mở rộng.
+* Tính sẵn sàng.
+* Khả năng chịu lỗi.
+* Bảo mật.
+* Khả năng phục hồi.
+
+Do đó, các **BR_31, BR_32, BR_33 và BR_34** không nên cố ép thành các chức năng nghiệp vụ thông thường. Các yêu cầu này sẽ được phân tích sâu hơn ở bước **Non-Functional Requirements và Architecture Requirements**.
+
+---
+
+# 7.16. Liên kết Business Process → Functional Requirement
+
+| Business Process                      | Functional Requirement chính |
+| ------------------------------------- | ---------------------------- |
+| **BP01 – Quản lý tài khoản**          | FR_01 → FR_04, FR_48, FR_49  |
+| **BP02 – Đặt xe và phân công tài xế** | FR_10 → FR_17                |
+| **BP03 – Thực hiện chuyến đi**        | FR_18 → FR_25                |
+| **BP04 – Thanh toán**                 | FR_26 → FR_32                |
+| **BP05 – Thông báo**                  | FR_33 → FR_34                |
+| **BP06 – Quản trị vận hành**          | FR_37 → FR_43                |
+| **BP07 – Báo cáo**                    | FR_44 → FR_47                |
+| **BP08 – Đánh giá tài xế**            | FR_35 → FR_36                |
+| **BP09 – Audit & bảo mật**            | FR_48 → FR_51                |
+
+---
+
+# 7.17. Kết quả của Bước 7
+
+Sau Bước 7, các yêu cầu nghiệp vụ của CAB System đã được chuyển từ mức **Business Requirement** sang các chức năng cụ thể của hệ thống.
+
+Luồng phân tích hiện tại:
+
+```text
+Business Goal
+      ↓
+Business Requirement
+      ↓
+Business Process
+      ↓
+Functional Requirement
+      ↓
+Use Case
+      ↓
+User Story / Acceptance Criteria
+      ↓
+Thiết kế hệ thống
+```
+
+Các chức năng cốt lõi của CAB System hiện được xác định gồm:
+
+**Quản lý tài khoản**
+→ **Đặt xe**
+→ **Tìm kiếm & phân công tài xế**
+→ **Thực hiện chuyến**
+→ **Theo dõi chuyến**
+→ **Thanh toán**
+→ **Thông báo**
+→ **Đánh giá**
+→ **Quản trị vận hành**
+→ **Báo cáo**
+→ **Bảo mật & Audit**
+
+Đây là cơ sở để thực hiện bước tiếp theo: **phân rã Functional Requirement thành Use Case và xác định Actor – Use Case – quan hệ giữa các Use Case**.
