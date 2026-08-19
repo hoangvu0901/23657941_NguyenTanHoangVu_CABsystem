@@ -58,3 +58,29 @@ Về lâu dài, kiến trúc hệ thống được thiết kế để cho phép 
 | Giữ hài lòng | Cao | Thấp | Cơ quan quản lý/pháp lý, Nhà cung cấp thanh toán | Tuân thủ ràng buộc, cập nhật khi có thay đổi liên quan |
 | Thông báo thường xuyên | Thấp | Cao | Khách hàng, Tài xế | Lắng nghe kỹ khi thu thập yêu cầu, cập nhật tiến độ định kỳ |
 | Giám sát | Thấp | Thấp | Bộ phận CSKH, Bộ phận tài chính/kế toán | Theo dõi tối thiểu, liên hệ khi cần |
+
+ | Nhóm               | Mức ảnh hưởng | Mức quan tâm | Cách quản lý                                                 |
+| ------------------ | ------------- | ------------ | ------------------------------------------------------------ |
+| **Manage Closely** | Cao           | Cao          | Làm việc thường xuyên, lấy ý kiến và phối hợp chặt chẽ       |
+| **Keep Satisfied** | Cao           | Thấp         | Đảm bảo nhu cầu quan trọng được đáp ứng, duy trì sự hài lòng |
+| **Keep Informed**  | Thấp          | Cao          | Cập nhật thông tin thường xuyên, thu thập phản hồi           |
+| **Monitor**        | Thấp          | Thấp         | Theo dõi và chỉ phối hợp khi cần thiết                       |
+
+# Bước 3: Xác định Business Goals (BG) – Dự án CAB System
+
+| Mã | Business Goal | Mô tả |
+|---|---|---|
+| BG01 | Tự động hóa tìm kiếm và phân công tài xế | Thay thế phân công thủ công bằng cơ chế tự động dựa trên vị trí, trạng thái sẵn sàng và tiêu chí vận hành; có cơ chế dự phòng khi tài xế không phản hồi/từ chối |
+| BG02 | Theo dõi chuyến đi theo thời gian thực | Khách hàng biết được trạng thái tìm tài xế, tài xế nhận chuyến, thời gian dự kiến đến và trạng thái hiện tại của chuyến đi |
+| BG03 | Hỗ trợ thanh toán đa dạng, quản lý tập trung | Thanh toán tiền mặt/điện tử, tích hợp cổng thanh toán ngoài, không lưu thông tin nhạy cảm, dữ liệu giao dịch quản lý tập trung |
+| BG04 | Thông báo linh hoạt, đa kênh | Gửi thông báo theo từng mốc vòng đời chuyến đi; kiến trúc cho phép bổ sung kênh thông báo mới trong tương lai |
+| BG05 | Công cụ quản trị vận hành hiệu quả | Quản lý khách hàng/tài xế/phương tiện/chuyến đi, giám sát, xử lý sự cố, tra cứu lịch sử; có phân quyền cho thao tác nhạy cảm |
+| BG06 | Báo cáo hỗ trợ ra quyết định | Báo cáo số lượng chuyến, doanh thu, tỷ lệ hoàn thành/hủy, hiệu quả tài xế cho ban lãnh đạo |
+| BG07 | Khả năng mở rộng quy mô người dùng | Hệ thống phục vụ được số lượng lớn khách hàng và tài xế, đáp ứng tăng trưởng dài hạn |
+| BG08 | Ổn định và chịu lỗi độc lập | Các thành phần mở rộng độc lập, cô lập lỗi — lỗi thanh toán/thông báo không làm sập toàn hệ thống, đặc biệt giờ cao điểm |
+| BG09 | An toàn và bảo mật thông tin | Xác thực người dùng, kiểm soát quyền truy cập, bảo vệ dữ liệu cá nhân/vị trí/giao dịch, lưu vết thao tác quan trọng |
+| BG10 | Kiến trúc linh hoạt cho phát triển dài hạn | Dễ bổ sung dịch vụ/thanh toán/kênh thông báo mới, triển khai từng phần mà không ảnh hưởng hệ thống đang chạy |
+
+---
+
+**Nhận xét:** BG01–BG06 là mục tiêu nghiệp vụ cốt lõi (chức năng), BG07–BG10 là mục tiêu kiến trúc/kỹ thuật nhưng xuất phát từ nhu cầu kinh doanh. Với thời hạn 7 tuần, cần xác nhận lại mức độ ưu tiên giữa các BG để xác định phạm vi MVP.
