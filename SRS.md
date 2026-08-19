@@ -558,17 +558,95 @@ Các Business Requirement được xây dựng để bao phủ các Business Goa
 
 Dựa trên các Business Requirement đã xác định ở Bước 5, các nghiệp vụ của CAB System được kết hợp thành các Business Process chính. Mỗi Business Process mô tả một luồng nghiệp vụ hoàn chỉnh và được biểu diễn bằng sơ đồ Mermaid.
 
+# Bước 6: Kết hợp các nghiệp vụ thành Business Process
+
+Dựa trên các Business Requirement (BR) đã xác định ở Bước 5, các yêu cầu nghiệp vụ được kết hợp thành các Business Process hoàn chỉnh.
+
+Mục tiêu của bước này là chuyển các Business Requirement rời rạc thành các **luồng nghiệp vụ đầu-cuối (End-to-End Business Flow)**, thể hiện sự tương tác giữa các Actor và hệ thống trong quá trình cung cấp dịch vụ đặt xe.
+
+---
+
 ## 6.1. Tổng quan các Business Process
 
-| Mã | Business Process | Mô tả |
-|---|---|---|
-| BP01 | Quản lý tài khoản | Đăng ký, đăng nhập và quản lý thông tin khách hàng/tài xế |
-| BP02 | Đặt xe và phân công tài xế | Tiếp nhận yêu cầu, tìm kiếm và phân công tài xế |
-| BP03 | Thực hiện chuyến đi | Quản lý toàn bộ trạng thái của chuyến từ khi tài xế nhận đến khi hoàn thành |
-| BP04 | Thanh toán | Tính cước, lựa chọn phương thức và xử lý giao dịch |
-| BP05 | Thông báo | Gửi thông báo cho khách hàng và tài xế theo từng sự kiện |
-| BP06 | Quản trị vận hành | Quản lý người dùng, tài xế, phương tiện, chuyến đi và xử lý sự cố |
-| BP07 | Báo cáo | Tổng hợp dữ liệu chuyến đi, doanh thu và hiệu quả tài xế |
+| Mã | Business Process | BR liên quan | Actor chính |
+|---|---|---|---|
+| **BP01** | Quản lý tài khoản | BR_01 | Customer, Driver, Operations Staff |
+| **BP02** | Đặt xe và phân công tài xế | BR_02 → BR_08 | Customer, Driver |
+| **BP03** | Thực hiện và theo dõi chuyến đi | BR_09 → BR_13, BR_22 | Customer, Driver, Operations Staff |
+| **BP04** | Thanh toán chuyến đi | BR_14 → BR_19 | Customer, Driver, Payment Gateway |
+| **BP05** | Thông báo | BR_06, BR_20, BR_21 | Customer, Driver |
+| **BP06** | Quản trị vận hành | BR_23 → BR_28 | Operations Staff, Administrator |
+| **BP07** | Báo cáo và phân tích | BR_29, BR_30 | Operations Staff, Management |
+| **BP08** | Đánh giá tài xế | BR_22 | Customer, Driver |
+| **BP09** | Audit và bảo mật | BR_27, BR_28, BR_35 | User, Operations Staff, Administrator |
+
+---
+
+# 6.2. Business Process tổng thể của CAB System
+
+Toàn bộ hoạt động nghiệp vụ chính của CAB System có thể được kết hợp thành chuỗi:
+
+```text
+Quản lý tài khoản
+       ↓
+Khách hàng đặt xe
+       ↓
+Tìm tài xế
+       ↓
+Phân công tài xế
+       ↓
+Thực hiện chuyến
+       ↓
+Theo dõi chuyến
+       ↓
+Hoàn thành chuyến
+       ↓
+Tính cước
+       ↓
+Thanh toán
+       ↓
+Đánh giá tài xế
+       ↓
+Lưu trữ dữ liệu
+       ↓
+Quản trị & Báo cáo
+
+Trong quá trình trên:
+
+BP05 – Thông báo hoạt động xuyên suốt các nghiệp vụ.
+BP06 – Quản trị vận hành hỗ trợ giám sát và xử lý sự cố.
+BP09 – Audit & Bảo mật kiểm soát các thao tác quan trọng.
+
+#6.3. BP01 – Quản lý tài khoản
+<img width="694" height="1021" alt="image" src="https://github.com/user-attachments/assets/1dccafc6-829e-489e-b296-f3cbb72c6fb8" />
+#6.4. BP02 – Đặt xe và phân công tài xế
+<img width="658" height="1022" alt="image" src="https://github.com/user-attachments/assets/02810c66-f028-40d9-9738-acc738110f92" />
+#6.5. BP03 – Thực hiện và theo dõi chuyến đi
+<img width="250" height="1028" alt="image" src="https://github.com/user-attachments/assets/349dbe49-2892-40f6-b679-c019f9a9393b" />
+#6.6. BP04 – Thanh toán chuyến đi
+<img width="690" height="1037" alt="image" src="https://github.com/user-attachments/assets/222c6502-0ef5-4029-9533-97c61b4dae0a" />
+#6.7. BP05 – Thông báo
+<img width="1012" height="812" alt="image" src="https://github.com/user-attachments/assets/6f7ce729-45dd-44d5-b2aa-734368da6f42" />
+#6.8. BP06 – Quản trị vận hành
+<img width="997" height="642" alt="image" src="https://github.com/user-attachments/assets/0930c8ba-e7a0-4a32-babd-8b9d86fbf9c9" />
+#6.9. BP07 – Báo cáo và phân tích
+<img width="1014" height="743" alt="image" src="https://github.com/user-attachments/assets/a6184292-e545-49e7-bbcb-195c8aabd097" />
+#6.10. BP08 – Đánh giá tài xế
+<img width="412" height="1028" alt="image" src="https://github.com/user-attachments/assets/cd216155-1302-4db0-a2da-422ea16df82c" />
+#6.11. BP09 – Audit và bảo mật
+<img width="637" height="1036" alt="image" src="https://github.com/user-attachments/assets/a5ca2109-12e4-442d-8c77-f852ca06d399" />
+#6.12. Business Process tổng hợp – End-to-End
+
+<img width="789" height="1040" alt="image" src="https://github.com/user-attachments/assets/c44af15f-7d93-46ee-9a73-1bfb85cf6ae9" />
+
+
+
+
+
+
+
+
+
 # Bước 7: Phân rã các yêu cầu về chức năng
 
 Dựa trên các Business Requirement (BR) đã xác định ở Bước 5 và các Business Process (BP) ở Bước 6, các yêu cầu nghiệp vụ được tiếp tục phân rã thành các **Functional Requirement (FR)**.
