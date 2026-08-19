@@ -84,3 +84,38 @@ Về lâu dài, kiến trúc hệ thống được thiết kế để cho phép 
 ---
 
 **Nhận xét:** BG01–BG06 là mục tiêu nghiệp vụ cốt lõi (chức năng), BG07–BG10 là mục tiêu kiến trúc/kỹ thuật nhưng xuất phát từ nhu cầu kinh doanh. Với thời hạn 7 tuần, cần xác nhận lại mức độ ưu tiên giữa các BG để xác định phạm vi MVP.
+# Bước 4: Xác định Phạm vi (Scope) – Dự án CAB System
+
+## 4.1. In Scope (Trong phạm vi)
+
+| Nhóm | Nội dung trong phạm vi |
+|---|---|
+| Khách hàng | Đăng ký/đăng nhập tài khoản, cập nhật thông tin cá nhân, nhập điểm đón/điểm đến, chọn loại xe, gửi yêu cầu đặt xe, theo dõi trạng thái chuyến đi thời gian thực, xem lịch sử chuyến, xem số tiền phải trả, đánh giá tài xế sau chuyến |
+| Tài xế | Đăng ký/được tạo tài khoản bởi nhân viên vận hành, cập nhật hồ sơ và thông tin phương tiện, chuyển trạng thái sẵn sàng nhận chuyến, nhận thông báo chuyến mới, chấp nhận/từ chối chuyến, cập nhật trạng thái chuyến đi (đến điểm đón, đón khách, đang di chuyển, hoàn thành), cập nhật vị trí |
+| Tìm kiếm & phân công tài xế | Xác định tài xế phù hợp theo vị trí và trạng thái sẵn sàng, cơ chế chuyển sang tài xế khác khi tài xế đầu tiên không phản hồi/từ chối, thông báo cho khách hàng khi không tìm được tài xế |
+| Thanh toán & tính cước | Tính cước sau khi hoàn thành chuyến, hỗ trợ thanh toán tiền mặt và điện tử, tích hợp với một nhà cung cấp thanh toán bên ngoài (không lưu thông tin nhạy cảm), thông báo và cho xử lý lại khi giao dịch điện tử thất bại |
+| Thông báo | Thông báo cho khách hàng ở các mốc: tiếp nhận yêu cầu, tài xế nhận chuyến, tài xế đến điểm đón, hoàn thành chuyến, kết quả thanh toán. Thông báo cho tài xế về chuyến mới hoặc thay đổi liên quan |
+| Quản trị vận hành | Giao diện quản trị: quản lý khách hàng, tài xế, phương tiện, chuyến đi; xem chuyến đang diễn ra; xử lý chuyến bị lỗi; tra cứu lịch sử giao dịch; phân quyền cho thao tác nhạy cảm |
+| Báo cáo | Báo cáo số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy, hiệu quả hoạt động của tài xế |
+| Phi chức năng nền tảng | Xác thực người dùng, kiểm soát quyền truy cập cho thao tác quản trị, lưu vết (audit log) thao tác quan trọng, kiến trúc mở rộng độc lập và triển khai từng phần |
+
+## 4.2. Out of Scope (Ngoài phạm vi – ở giai đoạn này)
+
+| Hạng mục | Lý do đưa ra ngoài phạm vi |
+|---|---|
+| Cách tính cước chi tiết theo từng loại dịch vụ | Chưa chốt — cần làm rõ với khách hàng |
+| Tiêu chí ưu tiên tài xế cụ thể (ngoài vị trí, trạng thái sẵn sàng) | Chưa chốt |
+| Thời gian tài xế phải phản hồi trước khi chuyển tài xế khác | Chưa chốt |
+| Chính sách hủy chuyến (ai được hủy, phí hủy, thời điểm) | Chưa chốt |
+| Cơ chế xử lý khi mất kết nối mạng | Chưa chốt |
+| Thời gian lưu trữ dữ liệu | Chưa chốt |
+| Bổ sung loại dịch vụ/phương thức thanh toán mới | Định hướng tương lai, không bắt buộc ở bản đầu |
+| Đa ngôn ngữ, đa tiền tệ | Không được đề cập trong tài liệu |
+| Ứng dụng di động native riêng cho iOS/Android | Chưa nêu rõ kênh triển khai, cần xác nhận |
+| Tích hợp bản đồ/định tuyến chi tiết (routing tối ưu) | Cần xác nhận mức độ chi tiết |
+| Khuyến mãi, mã giảm giá, chương trình khách hàng thân thiết | Không được đề cập |
+| Quy định pháp lý theo từng khu vực/quốc gia | Cần xác nhận với bên pháp lý |
+
+---
+
+**Nhận xét:** Phần In Scope bám sát các Business Goal cốt lõi (BG01–BG06) và một phần yêu cầu phi chức năng nền tảng (BG08, BG09). Phần Out of Scope chủ yếu là những điểm tài liệu nêu rõ là "chưa chốt" — đây chính là danh sách ưu tiên cho buổi làm rõ yêu cầu (requirement elicitation) với khách hàng trước khi đội phát triển bắt đầu thiết kế.
